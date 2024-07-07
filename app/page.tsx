@@ -1,13 +1,14 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 import LoginForm from "@/components/login.form";
+import { getCurrentUser } from "@/apis/server-side/getCurrentUser";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-
-      <LoginForm/>
-
-    </main>
-  );
+export default async function Home({params}: {params: string}) {
+  const currentUser = await getCurrentUser();
+  if(!currentUser){
+    redirect('/login');
+  }else{
+    redirect('/dashboard');
+  }
 }
