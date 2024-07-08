@@ -25,8 +25,6 @@ const LoginForm = (props: any) => {
   
   const theme: ThemeSpec = useTheme() as any;
   
-
-  
   const {auth, dispatch}:{auth: AuthState, dispatch: RematchDispatch<RootModel>} = props;
 
   const router = useRouter();
