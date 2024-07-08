@@ -4,9 +4,7 @@ import "./globals.css";
 import { StoreProvider } from "@/store/store.provider";
 import { getCurrentUser } from "@/apis/server-side/getCurrentUser";
 
-import { CssVarsProvider, CssVarsThemeOptions, extendTheme } from '@mui/joy/styles';
-import CssBaseline from '@mui/joy/CssBaseline';
-import { theme } from "./theme";
+
 
 
 const inter = Inter({ subsets: ["latin"] });

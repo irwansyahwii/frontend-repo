@@ -1,6 +1,7 @@
 'use client';
 
-import { theme } from "@/app/theme";
+
+import { DefaultTheme } from "@/theme/default.theme";
 import CssBaseline from "@mui/joy/CssBaseline"
 import { CssVarsProvider, extendTheme } from "@mui/joy/styles"
 
@@ -10,7 +11,7 @@ export const ClientSide = ({
   children: React.ReactNode;
 }>)=>{
   return (
-    <CssVarsProvider theme={extendTheme(theme)} >
+    <CssVarsProvider theme={extendTheme(DefaultTheme)} >
       <CssBaseline />
       {children}
     </CssVarsProvider>

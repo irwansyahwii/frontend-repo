@@ -11,6 +11,8 @@ import { RootModel } from "@/store/models";
 import { RematchDispatch } from "@rematch/core";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useTheme } from '@mui/joy/styles';
+import { ThemeSpec } from "@/theme/theme.spec";
 
 
 
@@ -21,7 +23,10 @@ const mapState = (state: RootState) => ({
 
 const LoginForm = (props: any) => {
   
+  const theme: ThemeSpec = useTheme() as any;
+  
 
+  
   const {auth, dispatch}:{auth: AuthState, dispatch: RematchDispatch<RootModel>} = props;
 
   const router = useRouter();
@@ -39,27 +44,16 @@ const LoginForm = (props: any) => {
   return (
     
     <Sheet
-      sx={{
-        width: 300,
-        mx: 'auto', // margin left & right
-        my: 30, // margin top & bottom
-        py: 3, // padding top & bottom
-        px: 2, // padding left & right
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 2,
-        borderRadius: 'sm',
-        boxShadow: 'md',
-      }}
-      variant="outlined"
+      sx={theme.loginForm.sheet}
+      variant={theme.loginForm.sheet.variant}
     >
       <div>
-        <Typography level="h4" component="h1">
+        <Typography level={theme.loginForm.caption.heading} component={theme.loginForm.caption.heading}>
           <b>Welcome!</b>
         </Typography>
-        <Typography level="body-sm">Sign in to continue.</Typography>
+        <Typography level={theme.loginForm.instruction.heading}>Sign in to continue.</Typography>
       </div>
-      <Button onClick={doSignIn} sx={{ mt: 1 /* margin top */ }}>Sign in with Google</Button>
+      <Button onClick={doSignIn} variant={theme.loginForm.signInButton.variant} sx={theme.loginForm.signInButton}>Sign in with Google</Button>
     </Sheet>      
 
   )
