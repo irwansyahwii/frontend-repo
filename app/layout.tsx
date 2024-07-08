@@ -4,11 +4,13 @@ import "./globals.css";
 import { StoreProvider } from "@/store/store.provider";
 import { getCurrentUser } from "@/apis/server-side/getCurrentUser";
 
-import { CssVarsProvider } from '@mui/joy/styles';
+import { CssVarsProvider, CssVarsThemeOptions, extendTheme } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
+import { theme } from "./theme";
 
 
 const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,10 +30,7 @@ export default async function RootLayout({
       </head>
       <body className={inter.className}>
         <StoreProvider currentUser={currentUser}>
-          <CssVarsProvider>
-            <CssBaseline />
-            {children}
-          </CssVarsProvider>
+          {children}
         </StoreProvider>
       </body>
     </html>
