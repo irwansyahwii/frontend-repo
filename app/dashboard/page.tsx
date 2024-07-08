@@ -1,13 +1,17 @@
+import EditUser from "@/components/edit.user";
+import { RootState } from "@/store/store";
 import Image from "next/image";
-import styles from "./page.module.css";
-import LoginForm from "@/components/login.form";
+import { connect } from "react-redux";
+
 
 export default function MainPage() {
   return (
-    <main className={styles.main}>
+    <main >
 
-      <div>MAIN PAGE</div>
+      <EditUser/>
 
     </main>
   );
 }
+
+

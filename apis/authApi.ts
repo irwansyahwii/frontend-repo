@@ -4,12 +4,12 @@ import { delay } from "@/utils/delay";
 
 export interface AuthApi {
   checkLoggedIn(): Promise<UserInfo | null>;
+  loginWithGoogle():Promise<void>;
 }
 
+const apiMap = new Map<string, AuthApi>();
+
 export const getAuthApi = ()=>{
-  const apiMap = new Map<string, AuthApi>();
-  apiMap.set('DummyAuthApi', new DummyAuthApi());
-  apiMap.set('DummyAuthApiNotLoggedIn', new DummyAuthApiNotLoggedIn());
 
   const apiInstance = apiMap.get(process.env.NEXT_PUBLIC_AUTH_API || "") || null;
   if(!apiInstance){
@@ -20,20 +20,38 @@ export const getAuthApi = ()=>{
 }
 
 class DummyAuthApi implements AuthApi {
-  async checkLoggedIn(): Promise<UserInfo | null> {
-    await delay(1000);
-    return ({
+  currentUser: UserInfo | null = null
+
+
+  async loginWithGoogle(): Promise<void> {
+    await delay(1000);    
+    
+    this.currentUser = {
       email: 'dummy@dummy.com',
       fullName: 'Dummy Name',
       id: 'dummy-id',      
-    });
+    };
+    
+    return;
+  }
+  async checkLoggedIn(): Promise<UserInfo | null> {
+    await delay(1000);
+    
+    return this.currentUser;
   }
 }
 
 class DummyAuthApiNotLoggedIn implements AuthApi {
+  async loginWithGoogle(): Promise<void> {
+    await delay(1000);
+    return;
+  }
   async checkLoggedIn(): Promise<UserInfo | null> {
     await delay(1000);
     return null;
   }
 
 }
+
+apiMap.set('DummyAuthApi', new DummyAuthApi());
+apiMap.set('DummyAuthApiNotLoggedIn', new DummyAuthApiNotLoggedIn());

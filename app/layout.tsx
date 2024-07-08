@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@/store/store.provider";
-import { getAuthApi } from "@/apis/authApi";
 import { getCurrentUser } from "@/apis/server-side/getCurrentUser";
 
-
+import { CssVarsProvider } from '@mui/joy/styles';
+import CssBaseline from '@mui/joy/CssBaseline';
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,9 +23,15 @@ export default async function RootLayout({
   const currentUser = await getCurrentUser();
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </head>
       <body className={inter.className}>
         <StoreProvider currentUser={currentUser}>
-          {children}
+          <CssVarsProvider>
+            <CssBaseline />
+            {children}
+          </CssVarsProvider>
         </StoreProvider>
       </body>
     </html>
