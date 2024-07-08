@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useTheme } from '@mui/joy/styles';
 import { ThemeSpec } from "@/theme/theme.spec";
-import Snackbar from '@mui/joy/Snackbar';
+import Snackbar, { snackbarClasses } from '@mui/joy/Snackbar';
 import { delay } from "@/utils/delay";
 
 
@@ -28,14 +28,18 @@ const mapState = (state: RootState) => ({
 
 
 const LoginForm = (props: any) => {
-  const [snackBarMessage, setSnackBarMessage] = useState<string>("");
+  const [snackBarMessage, setSnackBarMessage] = useState<{color: "success" | "danger", message: string}>({color:"success", message: ""});
   const theme: ThemeSpec = useTheme() as any;
   
   const {auth, dispatch, loading}:{loading: boolean, auth: AuthState, dispatch: RematchDispatch<RootModel>} = props;
 
   const router = useRouter();
   const doSignIn = async ()=>{
-    await dispatch.auth.loginWithGoogle();    
+    try{
+      await dispatch.auth.loginWithGoogle();    
+    }catch{
+      setSnackBarMessage({color: "danger", message: "Login failed!"});
+    }    
   }
 
   const navigateToDashboard = useCallback(async ()=>{
@@ -45,13 +49,19 @@ const LoginForm = (props: any) => {
 
   useEffect(()=>{
     if(auth.isLoggedIn){
-      setSnackBarMessage("You have successfully logged in!");
+      setSnackBarMessage({color: "success", message:"You have successfully logged in!"});
       navigateToDashboard();
     }
   }, [router, auth.isLoggedIn, navigateToDashboard]);
   return (
     <>
-      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={snackBarMessage.length > 0} >{snackBarMessage}</Snackbar>
+      <Snackbar autoHideDuration={800} 
+        onClose={() => {
+          setSnackBarMessage({...snackBarMessage, message: ""})
+        }}      
+        color={snackBarMessage.color} anchorOrigin={{vertical: 'top', horizontal: 'center'}} 
+        open={snackBarMessage.message.length > 0} >{snackBarMessage.message}</Snackbar>
+
       <Sheet
         sx={theme.loginForm.sheet}
         variant={theme.loginForm.sheet.variant}
