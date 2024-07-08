@@ -41,7 +41,7 @@ export class FirebaseAuthApi implements AuthApi {
   async checkLoggedIn(): Promise<UserInfo | null> {
     
     let userInfo: UserInfo | null = await this.getCurrentUser();
-    console.log(userInfo);
+    
 
     return userInfo;
   }
