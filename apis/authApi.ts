@@ -1,7 +1,8 @@
 
 import { UserInfo } from "@/store/models/user";
-import { delay } from "@/utils/delay";
 import { FirebaseAuthApi } from "./firebase/authAPIFirebase";
+import { DummyAuthApiNotLoggedIn } from "./dummies/DummyAuthApiNotLoggedIn";
+import { DummyAuthApi } from "./dummies/DummyAuthApi";
 
 export interface AuthApi {
   checkLoggedIn(): Promise<UserInfo | null>;
@@ -10,6 +11,10 @@ export interface AuthApi {
 }
 
 const apiMap = new Map<string, AuthApi>();
+
+apiMap.set('DummyAuthApi', new DummyAuthApi());
+apiMap.set('DummyAuthApiNotLoggedIn', new DummyAuthApiNotLoggedIn());
+apiMap.set("FirebaseAuthApi", new FirebaseAuthApi())
 
 export const getAuthApi = ()=>{
 
@@ -20,48 +25,3 @@ export const getAuthApi = ()=>{
 
   return apiInstance;
 }
-
-class DummyAuthApi implements AuthApi {
-  logout(): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-  currentUser: UserInfo | null = null
-
-
-  async loginWithGoogle(): Promise<void> {
-    
-    await delay(1000);    
-    
-    this.currentUser = {
-      email: 'dummy@dummy.com',
-      fullName: 'Dummy Name',
-      id: 'dummy-id',      
-    };
-    
-    return;
-  }
-  async checkLoggedIn(): Promise<UserInfo | null> {
-    await delay(1000);
-    
-    return this.currentUser;
-  }
-}
-
-class DummyAuthApiNotLoggedIn implements AuthApi {
-  logout(): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-  async loginWithGoogle(): Promise<void> {
-    await delay(1000);
-    return;
-  }
-  async checkLoggedIn(): Promise<UserInfo | null> {
-    await delay(1000);
-    return null;
-  }
-
-}
-
-apiMap.set('DummyAuthApi', new DummyAuthApi());
-apiMap.set('DummyAuthApiNotLoggedIn', new DummyAuthApiNotLoggedIn());
-apiMap.set("FirebaseAuthApi", new FirebaseAuthApi())
