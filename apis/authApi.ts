@@ -24,7 +24,7 @@ class DummyAuthApi implements AuthApi {
 
 
   async loginWithGoogle(): Promise<void> {
-    throw new Error("adasd");
+    
     await delay(1000);    
     
     this.currentUser = {

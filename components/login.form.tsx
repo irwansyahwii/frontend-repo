@@ -56,6 +56,7 @@ const LoginForm = (props: any) => {
   return (
     <>
       <Snackbar autoHideDuration={800} 
+        variant="solid"
         onClose={() => {
           setSnackBarMessage({...snackBarMessage, message: ""})
         }}      
