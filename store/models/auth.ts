@@ -6,18 +6,19 @@ import { delay } from "@/utils/delay";
 
 
 export interface AuthState {
-  isLoggedIn: boolean;
-  prev: string;
+  isLoggedIn: boolean;  
 }
 
 export const auth = createModel<RootModel>()({
   state: {
-    isLoggedIn: false,
-    prev: ''
+    isLoggedIn: false    
   } as AuthState,
   reducers:{
-    loggedIn:(state: AuthState, payload: UserInfo) => {
-      return {...state, isLoggedIn: (payload != null), prev: 'Irwan'};
+    loggedIn:(state: AuthState, payload: UserInfo) => {      
+      return {...state, isLoggedIn: (payload != null)};
+    },
+    logout(state: AuthState){
+      return {...state, isLoggedIn: false};
     }
   },
   effects:(dispatch)=>({

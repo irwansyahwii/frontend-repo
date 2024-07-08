@@ -6,8 +6,5 @@ import { getAuthApi } from "../authApi";
 
 
 export const getCurrentUser = async () => {
-  const authApi = getAuthApi();
-  const currentUser = await authApi.checkLoggedIn();
-
-  return currentUser;
+  return null;
 }

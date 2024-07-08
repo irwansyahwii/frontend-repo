@@ -53,6 +53,11 @@ const LoginForm = (props: any) => {
       navigateToDashboard();
     }
   }, [router, auth.isLoggedIn, navigateToDashboard]);
+
+  useEffect(()=>{
+    dispatch.auth.checkLoggedIn();
+  }, [dispatch.auth]);
+
   return (
     <>
       <Snackbar autoHideDuration={800} 

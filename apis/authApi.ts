@@ -1,10 +1,12 @@
 
 import { UserInfo } from "@/store/models/user";
 import { delay } from "@/utils/delay";
+import { FirebaseAuthApi } from "./firebase/authAPIFirebase";
 
 export interface AuthApi {
   checkLoggedIn(): Promise<UserInfo | null>;
   loginWithGoogle():Promise<void>;
+  logout():Promise<void>;
 }
 
 const apiMap = new Map<string, AuthApi>();
@@ -20,6 +22,9 @@ export const getAuthApi = ()=>{
 }
 
 class DummyAuthApi implements AuthApi {
+  logout(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
   currentUser: UserInfo | null = null
 
 
@@ -43,6 +48,9 @@ class DummyAuthApi implements AuthApi {
 }
 
 class DummyAuthApiNotLoggedIn implements AuthApi {
+  logout(): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
   async loginWithGoogle(): Promise<void> {
     await delay(1000);
     return;
@@ -56,3 +64,4 @@ class DummyAuthApiNotLoggedIn implements AuthApi {
 
 apiMap.set('DummyAuthApi', new DummyAuthApi());
 apiMap.set('DummyAuthApiNotLoggedIn', new DummyAuthApiNotLoggedIn());
+apiMap.set("FirebaseAuthApi", new FirebaseAuthApi())
