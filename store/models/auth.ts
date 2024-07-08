@@ -17,11 +17,16 @@ export const auth = createModel<RootModel>()({
     loggedIn:(state: AuthState, payload: UserInfo) => {      
       return {...state, isLoggedIn: (payload != null)};
     },
-    logout(state: AuthState){
+    loggedout(state: AuthState){
       return {...state, isLoggedIn: false};
     }
   },
   effects:(dispatch)=>({
+    async logout(){
+      const authApi = getAuthApi();
+      await authApi.logout();
+      dispatch.auth.loggedout();
+    },
     async loginWithGoogle(){
       
       const authApi = getAuthApi();

@@ -13,7 +13,7 @@ export const db = getFirestore(firebaseApp);
 
 
 onIdTokenChanged(auth, async (user)=>{
-  
+  console.log("onIdTokenChanged, user:", user);
   if(user){
     const token = await user.getIdToken();
     

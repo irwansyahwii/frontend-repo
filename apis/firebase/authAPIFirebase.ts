@@ -6,28 +6,35 @@ import { AuthApi } from "../authApi";
 import {
   GoogleAuthProvider,
   onAuthStateChanged as _onAuthStateChanged,
+  signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "./clientApp";
-import { error } from "console";
 
 export class FirebaseAuthApi implements AuthApi {
 
   logout(): Promise<void> {
+    console.log("Signing out from firebase");
     return auth.signOut();
   }
 
   async getCurrentUser():Promise<UserInfo | null>{
     return new Promise((resolve, reject)=>{
       auth.onAuthStateChanged((currentUser)=>{
+        
+        console.log("onAuthStateChanged, currentUSer:", currentUser);
+
         if(!currentUser){
           resolve(null);
         }else{
           resolve(
             {
               email: currentUser.email || "",
-              fullName: currentUser.displayName || "",
-              id: currentUser.uid
+              firstName : currentUser.displayName || "",
+              lastName: "",
+              id: currentUser.uid,
+              role: "",
+              country: "Indonesia"
             }
 
           )
@@ -49,7 +56,7 @@ export class FirebaseAuthApi implements AuthApi {
   async loginWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithRedirect(auth, provider);
+      await signInWithPopup(auth, provider);
     } catch (error) {
       console.log(error);
     }

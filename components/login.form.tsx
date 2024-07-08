@@ -48,6 +48,7 @@ const LoginForm = (props: any) => {
   },[router]);
 
   useEffect(()=>{
+    console.log("auth.isLoggedIn:", auth.isLoggedIn);
     if(auth.isLoggedIn){
       setSnackBarMessage({color: "success", message:"You have successfully logged in!"});
       navigateToDashboard();

@@ -33,5 +33,6 @@ export async function getAuthenticatedAppForUser() {
 
 export const isStillLoggedIn = async ()=> {
   const currentUser = await getAuthenticatedAppForUser();
+  console.log("isStillLoggedIn:", (currentUser != null))
   return (currentUser != null);
 }

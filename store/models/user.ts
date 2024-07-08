@@ -6,7 +6,10 @@ import { emitWarning } from "process";
 export interface UserInfo{
     id: string;
     email: string;
-    fullName: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    country: string;
 }
 
 export interface UserState{

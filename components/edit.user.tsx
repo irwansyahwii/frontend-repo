@@ -2,6 +2,7 @@
 
 import { RootState } from "@/store/store";
 import { connect } from "react-redux";
+import UserProfile from "./user.profile";
 
 const mapState = (state: RootState) => ({
   auth: state.auth
@@ -10,7 +11,7 @@ const mapState = (state: RootState) => ({
 const EditUser = (props: any)=>{
   console.log('props.auth.prev:', props.auth.prev)
   return (
-    <div>Main Page {props.auth.prev}</div>
+    <UserProfile/>
   )
 
 }
