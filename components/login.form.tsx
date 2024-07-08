@@ -17,7 +17,8 @@ import { ThemeSpec } from "@/theme/theme.spec";
 
 
 const mapState = (state: RootState) => ({
-  auth: state.auth
+  auth: state.auth,
+  loading: state.loading.models.auth
 })
 
 
@@ -25,7 +26,7 @@ const LoginForm = (props: any) => {
   
   const theme: ThemeSpec = useTheme() as any;
   
-  const {auth, dispatch}:{auth: AuthState, dispatch: RematchDispatch<RootModel>} = props;
+  const {auth, dispatch, loading}:{loading: boolean, auth: AuthState, dispatch: RematchDispatch<RootModel>} = props;
 
   const router = useRouter();
   const doSignIn = async ()=>{
@@ -51,7 +52,7 @@ const LoginForm = (props: any) => {
         </Typography>
         <Typography level={theme.loginForm.instruction.heading}>Sign in to continue.</Typography>
       </div>
-      <Button onClick={doSignIn} variant={theme.loginForm.signInButton.variant} sx={theme.loginForm.signInButton}>Sign in with Google</Button>
+      <Button loading={loading} onClick={doSignIn} variant={theme.loginForm.signInButton.variant} sx={theme.loginForm.signInButton}>Sign in with Google</Button>
     </Sheet>      
 
   )

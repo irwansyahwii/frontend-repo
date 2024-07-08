@@ -5,18 +5,11 @@ import { models, RootModel } from './models'
 type FullModel = ExtraModelsFromLoading<RootModel>
 
 
-export const initStore = (initialState: any) =>
-  init<RootModel, FullModel>({
+export const store =   init<RootModel, FullModel>({
     models,
     plugins: [loadingPlugin()],
-    redux: {
-      initialState,
-    },
   });
 
-export const store = init({
-	models,
-})
 
 
 export type Store = typeof store;
