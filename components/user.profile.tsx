@@ -114,49 +114,8 @@ const  UserProfile = (props: any)=> {
           <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2 }}>
             My profile
           </Typography>
-          <Button loading={authLoading} onClick={logout}>Logout</Button>
+          <Button loading={authLoading} sx={{ mt: 1, mb: 2 }} onClick={logout}>Logout</Button>
         </Box>
-        <Tabs
-          defaultValue={0}
-          sx={{
-            bgcolor: 'transparent',
-          }}
-        >
-          <TabList
-            tabFlex={1}
-            size="sm"
-            sx={{
-              pl: { xs: 0, md: 4 },
-              justifyContent: 'left',
-              [`&& .${tabClasses.root}`]: {
-                fontWeight: '600',
-                flex: 'initial',
-                color: 'text.tertiary',
-                [`&.${tabClasses.selected}`]: {
-                  bgcolor: 'transparent',
-                  color: 'text.primary',
-                  '&::after': {
-                    height: '2px',
-                    bgcolor: 'primary.500',
-                  },
-                },
-              },
-            }}
-          >
-            <Tab sx={{ borderRadius: '6px 6px 0 0' }} indicatorInset value={0}>
-              Settings
-            </Tab>
-            <Tab sx={{ borderRadius: '6px 6px 0 0' }} indicatorInset value={1}>
-              Team
-            </Tab>
-            <Tab sx={{ borderRadius: '6px 6px 0 0' }} indicatorInset value={2}>
-              Plan
-            </Tab>
-            <Tab sx={{ borderRadius: '6px 6px 0 0' }} indicatorInset value={3}>
-              Billing
-            </Tab>
-          </TabList>
-        </Tabs>        
       </Box>
       <Stack
         spacing={4}
@@ -194,23 +153,7 @@ const  UserProfile = (props: any)=> {
                   alt=""
                 />
               </AspectRatio>
-              {/* <IconButton
-                aria-label="upload new picture"
-                size="sm"
-                variant="outlined"
-                color="neutral"
-                sx={{
-                  bgcolor: 'background.body',
-                  position: 'absolute',
-                  zIndex: 2,
-                  borderRadius: '50%',
-                  left: 100,
-                  top: 170,
-                  boxShadow: 'sm',
-                }}
-              >
-                <EditRoundedIcon />
-              </IconButton> */}
+
             </Stack>
             <Stack spacing={2} sx={{ flexGrow: 1 }}>
               <Stack spacing={1}>
@@ -243,91 +186,8 @@ const  UserProfile = (props: any)=> {
                   />
                 </FormControl>
               </Stack>
-              <div>
-                <CountrySelector />
-              </div>
 
             </Stack>
-          </Stack>
-          <Stack
-            direction="column"
-            spacing={2}
-            sx={{ display: { xs: 'flex', md: 'none' }, my: 1 }}
-          >
-            <Stack direction="row" spacing={2}>
-              <Stack direction="column" spacing={1}>
-                <AspectRatio
-                  ratio="1"
-                  maxHeight={108}
-                  sx={{ flex: 1, minWidth: 108, borderRadius: '100%' }}
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-                    srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
-                    loading="lazy"
-                    alt=""
-                  />
-                </AspectRatio>
-                <IconButton
-                  aria-label="upload new picture"
-                  size="sm"
-                  variant="outlined"
-                  color="neutral"
-                  sx={{
-                    bgcolor: 'background.body',
-                    position: 'absolute',
-                    zIndex: 2,
-                    borderRadius: '50%',
-                    left: 85,
-                    top: 180,
-                    boxShadow: 'sm',
-                  }}
-                >
-                  <EditRoundedIcon />
-                </IconButton>
-              </Stack>
-            </Stack>
-            <FormControl>
-              <FormLabel>Role</FormLabel>
-              <Input size="sm" defaultValue="UI Developer" />
-            </FormControl>
-            <FormControl sx={{ flexGrow: 1 }}>
-              <FormLabel>Email</FormLabel>
-              <Input
-                size="sm"
-                type="email"
-                startDecorator={<EmailRoundedIcon />}
-                placeholder="email"
-                defaultValue="siriwatk@test.com"
-                sx={{ flexGrow: 1 }}
-              />
-            </FormControl>
-            <div>
-              <CountrySelector />
-            </div>
-            <div>
-              <FormControl sx={{ display: { sm: 'contents' } }}>
-                <FormLabel>Timezone</FormLabel>
-                <Select
-                  size="sm"
-                  startDecorator={<AccessTimeFilledRoundedIcon />}
-                  defaultValue="1"
-                >
-                  <Option value="1">
-                    Indochina Time (Bangkok){' '}
-                    <Typography textColor="text.tertiary" ml={0.5}>
-                      — GMT+07:00
-                    </Typography>
-                  </Option>
-                  <Option value="2">
-                    Indochina Time (Ho Chi Minh City){' '}
-                    <Typography textColor="text.tertiary" ml={0.5}>
-                      — GMT+07:00
-                    </Typography>
-                  </Option>
-                </Select>
-              </FormControl>
-            </div>
           </Stack>
           <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
               <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
