@@ -5,7 +5,6 @@ import { UserInfo } from "@/store/models/user";
 import { AuthApi } from "../authApi";
 import {
   GoogleAuthProvider,
-  signInWithPopup,
   onAuthStateChanged as _onAuthStateChanged,
   signInWithRedirect,
 } from "firebase/auth";
