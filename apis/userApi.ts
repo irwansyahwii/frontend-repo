@@ -11,6 +11,7 @@ export class UserApi {
       const cookies = parseCookies();
 
       const idToken = cookies["token"] || "";
+      console.log("JJJJ")
       console.log("user:", user);
       const response = await fetch(UPDATE_USER_DATA_URL,  {
         method: "POST",
@@ -21,6 +22,13 @@ export class UserApi {
         }
       });
 
+      console.log("ADAD")
+
+      // if(!response.ok){
+      //   console.log("BBB")
+      //   return {error: await response.json()};
+      // }
+
       const data = response.json();
 
       
@@ -28,7 +36,9 @@ export class UserApi {
       return data;
       
     } catch (error) {
+      
       console.log(error + "")      
+      throw new Error(error + "");
     }
   }
 }
