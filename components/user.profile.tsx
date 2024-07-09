@@ -44,7 +44,7 @@ const mapState = (rootState: RootState)=>{
 
 
 const  UserProfile = (props: any)=> {
-
+  const [updateResult, setUpdateResult] = React.useState({variant: "danger", message: ""});
   const [isLogoutInitiated, setIsLogoutInitiated] = React.useState(false);
   const router = useRouter();
   const {dispatch, authLoading, auth, user, userLoading}:{userLoading: boolean, authLoading: boolean, auth: AuthState, dispatch: RematchDispatch<RootModel>, user: UserState} = props;
@@ -90,16 +90,22 @@ const  UserProfile = (props: any)=> {
       console.log("Updating user data:", data);
       const response = await dispatch.user.updateUser(data);
 
-      console.log(response);
+      console.log("response:", response);
 
       if(response.error){
-        if(response.error == "ApiError: USER_IS_REQUIRED"){
-          
+        if(response.error.startsWith("ApiError: USER_IS_REQUIRED")){
+          setUpdateResult({variant: "danger", message: "User is required"});
         }
+        if(response.error.startsWith("First argument to verifyIdToken() must be a Firebase ID token string")){
+          console.log("HLOOO")
+          setUpdateResult({variant: "danger", message: "You have to re-login"});
+        }
+      }else{
+        setUpdateResult({variant: "success", message: "Data updated!"});
       }
       
     } catch (error) {
-      console.log(error + "")      
+      setUpdateResult({variant: "danger", message: error + ""});
     }
   } 
   
@@ -178,6 +184,7 @@ const  UserProfile = (props: any)=> {
           py: { xs: 2, md: 3 },
         }}
       >
+        {updateResult.message.length > 0 && (<Typography color={updateResult.variant} variant='solid' level="title-md" >{updateResult.message}</Typography>)} 
         <form onSubmit={handleSubmit(onSubmit)}>
 
         
@@ -189,12 +196,15 @@ const  UserProfile = (props: any)=> {
               </Typography>
             </Box>
             <Divider />
+            
             <Stack
               direction="row"
               spacing={3}
               sx={{ display: { xs: 'none', md: 'flex' }, my: 1 }}
             >
+              
               <Stack direction="column" spacing={1}>
+                
                 <AspectRatio
                   ratio="1"
                   maxHeight={200}
