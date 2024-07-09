@@ -1,0 +1,86 @@
+[debug] [2024-07-08T09:54:16.285Z] ----------------------------------------------------------------------
+[debug] [2024-07-08T09:54:16.287Z] Command:       /Users/irwansyah/.nvm/versions/node/v18.20.1/bin/node /Users/irwansyah/.nvm/versions/node/v18.20.1/bin/firebase login
+[debug] [2024-07-08T09:54:16.287Z] CLI Version:   13.13.0
+[debug] [2024-07-08T09:54:16.288Z] Platform:      darwin
+[debug] [2024-07-08T09:54:16.288Z] Node Version:  v18.20.1
+[debug] [2024-07-08T09:54:16.289Z] Time:          Mon Jul 08 2024 16:54:16 GMT+0700 (Western Indonesia Time)
+[debug] [2024-07-08T09:54:16.290Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-07-08T09:54:16.293Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[debug] [2024-07-08T09:54:17.164Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-07-08T09:54:17.164Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[warn] ⚠  Unable to fetch the CLI MOTD and remote config. This is not a fatal error, but may indicate an issue with your network connection. 
+[debug] [2024-07-08T09:54:17.165Z] Failed to fetch MOTD Error: EACCES: permission denied, mkdir '/Users/irwansyah/.config/configstore'
+You don't have access to this file.
+
+[debug] [2024-07-08T09:54:26.533Z] Error: EACCES: permission denied, mkdir '/Users/irwansyah/.config/configstore'
+You don't have access to this file.
+
+    at Object.mkdirSync (node:fs:1391:3)
+    at module.exports.sync (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/make-dir/index.js:114:6)
+    at set all [as all] (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/configstore/index.js:59:12)
+    at Configstore.set (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/configstore/index.js:91:12)
+    at Command.actionFn (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/lib/commands/login.js:37:35)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-07-08T09:54:26.807Z] Error: EACCES: permission denied, mkdir '/Users/irwansyah/.config/configstore'
+You don't have access to this file.
+
+    at Object.mkdirSync (node:fs:1391:3)
+    at module.exports.sync (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/make-dir/index.js:114:6)
+    at set all [as all] (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/configstore/index.js:59:12)
+    at Configstore.set (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/configstore/index.js:91:12)
+    at process.<anonymous> (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/lib/bin/firebase.js:102:35)
+    at process.emit (node:events:529:35)
+    at process.emit (node:domain:489:12)
+    at process.exit (node:internal/process/per_thread:191:15)
+    at Timeout._onTimeout (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/lib/errorOut.js:20:17)
+    at listOnTimeout (node:internal/timers:569:17)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-07-08T09:54:40.272Z] ----------------------------------------------------------------------
+[debug] [2024-07-08T09:54:40.274Z] Command:       /Users/irwansyah/.nvm/versions/node/v18.20.1/bin/node /Users/irwansyah/.nvm/versions/node/v18.20.1/bin/firebase login
+[debug] [2024-07-08T09:54:40.274Z] CLI Version:   13.13.0
+[debug] [2024-07-08T09:54:40.274Z] Platform:      darwin
+[debug] [2024-07-08T09:54:40.275Z] Node Version:  v18.20.1
+[debug] [2024-07-08T09:54:40.276Z] Time:          Mon Jul 08 2024 16:54:40 GMT+0700 (Western Indonesia Time)
+[debug] [2024-07-08T09:54:40.276Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-07-08T09:54:40.278Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] i  Firebase optionally collects CLI and Emulator Suite usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[debug] [2024-07-08T09:54:40.981Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-07-08T09:54:40.981Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[warn] ⚠  Unable to fetch the CLI MOTD and remote config. This is not a fatal error, but may indicate an issue with your network connection. 
+[debug] [2024-07-08T09:54:40.983Z] Failed to fetch MOTD Error: EACCES: permission denied, mkdir '/Users/irwansyah/.config/configstore'
+You don't have access to this file.
+
+[debug] [2024-07-08T09:54:51.628Z] Error: EACCES: permission denied, mkdir '/Users/irwansyah/.config/configstore'
+You don't have access to this file.
+
+    at Object.mkdirSync (node:fs:1391:3)
+    at module.exports.sync (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/make-dir/index.js:114:6)
+    at set all [as all] (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/configstore/index.js:59:12)
+    at Configstore.set (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/configstore/index.js:91:12)
+    at Command.actionFn (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/lib/commands/login.js:37:35)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-07-08T09:54:51.889Z] Error: EACCES: permission denied, mkdir '/Users/irwansyah/.config/configstore'
+You don't have access to this file.
+
+    at Object.mkdirSync (node:fs:1391:3)
+    at module.exports.sync (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/make-dir/index.js:114:6)
+    at set all [as all] (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/configstore/index.js:59:12)
+    at Configstore.set (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/node_modules/configstore/index.js:91:12)
+    at process.<anonymous> (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/lib/bin/firebase.js:102:35)
+    at process.emit (node:events:529:35)
+    at process.emit (node:domain:489:12)
+    at process.exit (node:internal/process/per_thread:191:15)
+    at Timeout._onTimeout (/Users/irwansyah/.nvm/versions/node/v18.20.1/lib/node_modules/firebase-tools/lib/errorOut.js:20:17)
+    at listOnTimeout (node:internal/timers:569:17)
+[error] 
+[error] Error: An unexpected error has occurred.
