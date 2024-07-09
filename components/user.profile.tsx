@@ -28,7 +28,7 @@ import { connect } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { delay } from '@/utils/delay';
-import { UserState } from '@/store/models/user';
+import { UserInfo, UserState } from '@/store/models/user';
 
 const mapState = (rootState: RootState)=>{
   return ({
@@ -45,7 +45,31 @@ const  UserProfile = (props: any)=> {
   const router = useRouter();
   const {dispatch, authLoading, auth, user}:{authLoading: boolean, auth: AuthState, dispatch: RematchDispatch<RootModel>, user: UserState} = props;
 
-  
+  const [userToEdit, setUserToEdit] = React.useState<UserInfo>({
+    country: "",
+    email: "",
+    firstName: "",
+    id: "",
+    lastName: "",
+    role: ""
+  });
+
+  useEffect(()=>{
+    console.log("user.currentUser:", user.currentUser);
+    if(user.currentUser){
+      setUserToEdit(user.currentUser)
+    }else{
+      setUserToEdit({
+        country: "",
+        email: "",
+        firstName: "",
+        id: "",
+        lastName: "",
+        role: ""
+      })   
+    }
+    
+  }, [user.currentUser]);
   
   const logout = ()=>{
     console.log("Logging out")
@@ -152,29 +176,28 @@ const  UserProfile = (props: any)=> {
                 <FormControl
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input defaultValue={""} value={user.currentUser ? user.currentUser.firstName || "" : ""} size="sm" placeholder="First name" />
+                  <Input value={userToEdit.firstName} size="sm" placeholder="First name" />
                 </FormControl>
                 <FormControl
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input defaultValue={""} value={user.currentUser ? user.currentUser.lastName || "" : ""} size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
+                  <Input value={userToEdit.lastName} size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
                 <FormControl>
                   <FormLabel>Role</FormLabel>
-                  <Input defaultValue={""} value={user.currentUser ? user.currentUser.role || "" : ""} size="sm" defaultValue="UI Developer" />
+                  <Input value={userToEdit.role} size="sm"  />
                 </FormControl>
                 <FormControl sx={{ flexGrow: 1 }}>
                   <FormLabel>Email</FormLabel>
                   <Input
-                    defaultValue={""}
-                    value={user.currentUser ? user.currentUser.email || "" : ""}
+                    
+                    value={userToEdit.email}
                     size="sm"
                     type="email"
                     startDecorator={<EmailRoundedIcon />}
                     placeholder="email"
-                    defaultValue="siriwatk@test.com"
                     sx={{ flexGrow: 1 }}
                   />
                 </FormControl>
