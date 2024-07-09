@@ -36,7 +36,8 @@ const mapState = (rootState: RootState)=>{
   return ({
     auth: rootState.auth,
     authLoading: rootState.loading.models.auth    ,
-    user: rootState.user
+    user: rootState.user,
+    userLoading: rootState.loading.models.user
   });
 }
 
@@ -46,7 +47,7 @@ const  UserProfile = (props: any)=> {
 
   const [isLogoutInitiated, setIsLogoutInitiated] = React.useState(false);
   const router = useRouter();
-  const {dispatch, authLoading, auth, user}:{authLoading: boolean, auth: AuthState, dispatch: RematchDispatch<RootModel>, user: UserState} = props;
+  const {dispatch, authLoading, auth, user, userLoading}:{userLoading: boolean, authLoading: boolean, auth: AuthState, dispatch: RematchDispatch<RootModel>, user: UserState} = props;
 
   const [userToEdit, setUserToEdit] = React.useState<UserInfo>({
     country: "",
@@ -84,7 +85,23 @@ const  UserProfile = (props: any)=> {
       setValue,
       formState: { errors },
     } = useForm<UserInfo>({defaultValues: userToEdit, values: userToEdit}) ;
-  const onSubmit: SubmitHandler<UserInfo> = (data) => console.log(data);  
+  const onSubmit: SubmitHandler<UserInfo> = async (data) => {
+    try {
+      console.log("Updating user data:", data);
+      const response = await dispatch.user.updateUser(data);
+
+      console.log(response);
+
+      if(response.error){
+        if(response.error == "ApiError: USER_IS_REQUIRED"){
+          
+        }
+      }
+      
+    } catch (error) {
+      console.log(error + "")      
+    }
+  } 
   
   const logout = ()=>{
     console.log("Logging out")
@@ -267,10 +284,7 @@ const  UserProfile = (props: any)=> {
             </Stack>
             <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>
                 <CardActions sx={{ alignSelf: 'flex-end', pt: 2 }}>
-                  <Button size="sm" variant="outlined" color="neutral">
-                    Cancel
-                  </Button>
-                  <Button type='submit' size="sm" variant="solid">
+                  <Button loading={userLoading} type='submit' size="sm" variant="solid">
                     Save
                   </Button>
                 </CardActions>
