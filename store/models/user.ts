@@ -16,12 +16,12 @@ export interface UserState{
   currentUser:UserInfo | null
 }
 
-export const User = createModel<RootModel>()({
+export const user = createModel<RootModel>()({
   state: {
     currentUser: null
   } as UserState,
   reducers:{
-    setCurrentUser:(state: UserState, payload: UserInfo): UserState=>{      
+    setCurrentUser:(state: UserState, payload: UserInfo | null): UserState=>{      
       return {...state, currentUser: payload};
     }
   }

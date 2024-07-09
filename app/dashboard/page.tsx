@@ -1,19 +1,13 @@
-import { ClientSide } from "@/components/client.side";
+import { getCurrentUser } from "@/apis/server-side/getCurrentUser";
 import EditUser from "@/components/edit.user";
-import { RootState } from "@/store/store";
-import Image from "next/image";
-import { connect } from "react-redux";
 
 
-export default function MainPage() {
+export default async function MainPage() {
+  const currentUser =  await getCurrentUser();
   return (
-    <ClientSide>
-      <main >
-
-        <EditUser/>
-
-      </main>
-    </ClientSide>
+              
+    <EditUser userToEdit={currentUser}/>
+    
   );
 }
 

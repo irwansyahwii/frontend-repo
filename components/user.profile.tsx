@@ -5,17 +5,9 @@ import Button from '@mui/joy/Button';
 import Divider from '@mui/joy/Divider';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-import FormHelperText from '@mui/joy/FormHelperText';
 import Input from '@mui/joy/Input';
-import IconButton from '@mui/joy/IconButton';
-import Textarea from '@mui/joy/Textarea';
 import Stack from '@mui/joy/Stack';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
 import Typography from '@mui/joy/Typography';
-import Tabs from '@mui/joy/Tabs';
-import TabList from '@mui/joy/TabList';
-import Tab, { tabClasses } from '@mui/joy/Tab';
 import Breadcrumbs from '@mui/joy/Breadcrumbs';
 import Link from '@mui/joy/Link';
 import Card from '@mui/joy/Card';
@@ -25,27 +17,24 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
-import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded';
-import VideocamRoundedIcon from '@mui/icons-material/VideocamRounded';
-import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRounded';
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
 
-import CountrySelector from './country.selector';
 import { RootState } from '@/store/store';
 
 import { AuthState } from '@/store/models/auth';
 import { RematchDispatch } from '@rematch/core';
 import { RootModel } from '@/store/models';
 import { connect } from 'react-redux';
-import Image from 'next/image';
+
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { delay } from '@/utils/delay';
+import { UserState } from '@/store/models/user';
 
 const mapState = (rootState: RootState)=>{
   return ({
     auth: rootState.auth,
-    authLoading: rootState.loading.models.auth    
+    authLoading: rootState.loading.models.auth    ,
+    user: rootState.user
   });
 }
 
@@ -54,7 +43,9 @@ const mapState = (rootState: RootState)=>{
 const  UserProfile = (props: any)=> {
   const [isLogoutInitiated, setIsLogoutInitiated] = React.useState(false);
   const router = useRouter();
-  const {dispatch, authLoading, auth}:{authLoading: boolean, auth: AuthState, dispatch: RematchDispatch<RootModel>} = props;
+  const {dispatch, authLoading, auth, user}:{authLoading: boolean, auth: AuthState, dispatch: RematchDispatch<RootModel>, user: UserState} = props;
+
+  
   
   const logout = ()=>{
     console.log("Logging out")
@@ -161,22 +152,24 @@ const  UserProfile = (props: any)=> {
                 <FormControl
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="First name" />
+                  <Input defaultValue={""} value={user.currentUser ? user.currentUser.firstName || "" : ""} size="sm" placeholder="First name" />
                 </FormControl>
                 <FormControl
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
+                  <Input defaultValue={""} value={user.currentUser ? user.currentUser.lastName || "" : ""} size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
                 <FormControl>
                   <FormLabel>Role</FormLabel>
-                  <Input size="sm" defaultValue="UI Developer" />
+                  <Input defaultValue={""} value={user.currentUser ? user.currentUser.role || "" : ""} size="sm" defaultValue="UI Developer" />
                 </FormControl>
                 <FormControl sx={{ flexGrow: 1 }}>
                   <FormLabel>Email</FormLabel>
                   <Input
+                    defaultValue={""}
+                    value={user.currentUser ? user.currentUser.email || "" : ""}
                     size="sm"
                     type="email"
                     startDecorator={<EmailRoundedIcon />}

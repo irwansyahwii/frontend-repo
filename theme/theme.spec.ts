@@ -1,5 +1,6 @@
+import { CssVarsThemeOptions } from "@mui/joy/styles"
 
-export interface ThemeSpec {
+export interface ThemeSpec extends CssVarsThemeOptions {
   loginForm: {
     sheet: {
       variant: any,

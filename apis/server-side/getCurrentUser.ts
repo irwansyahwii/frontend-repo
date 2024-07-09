@@ -3,12 +3,36 @@
 import "server-only";
 
 import { cookies } from "next/headers";
+import { UserInfo } from "@/store/models/user";
 
 
-export const getCurrentUser = async () => {
-  const cookieStore = cookies();
+const FETCH_USER_DATA_URL = "http://localhost:8000/fetch-user-data"
 
-  console.log(cookieStore.get("token"));
+
+export const getCurrentUser = async (): Promise<UserInfo | null> => {
+  try {
+    const cookieStore = cookies();
+
+    const tokenCookie =  cookieStore.get("token");
+    if(tokenCookie){
+      const idToken = tokenCookie.value;
+      const response = await fetch(FETCH_USER_DATA_URL, {
+        headers:{
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${idToken}`
+        }
+      })
+
+      const data = await response.json();
+
+      console.log("data:", data);
+
+      return data;
+    }  
+    
+  } catch (error) {
+    
+  }
 
   return null;
 }

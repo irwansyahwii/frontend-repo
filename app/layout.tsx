@@ -20,14 +20,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const currentUser = await getCurrentUser();
+  
   return (
     <html lang="en">
       <head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </head>
       <body className={inter.className}>
-        <StoreProvider currentUser={currentUser}>
+        <StoreProvider currentUser={null}>
           {children}
         </StoreProvider>
       </body>
